@@ -102,7 +102,7 @@ export default function Content() {
               Submit
             </button>
             <button className={style.btn2} onClick={() => setDescription(true)}>
-              Cancle
+              Cancel
             </button>
           </span>
         </>
