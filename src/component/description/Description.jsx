@@ -1,6 +1,5 @@
 import { Dialog, DialogContent } from "@mui/material";
 import { AiOutlineEye } from "react-icons/ai";
-import { dialogBox, watchNotification } from "../../atom/Atom";
 import classes from "./Description.module.css";
 import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
 import Title from "./title/Title";
@@ -9,30 +8,57 @@ import Activity from "./acitivity/Activity";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import Comment from "./comment/Comment";
-import { isCardDetail, dashBoardData, listIndex } from "../../atom/Atom";
+import {
+  isCardDetail,
+  dashBoardData,
+  listIndex,
+  dialogBox,
+  watchNotification,
+  TaskList,
+} from "../../atom/Atom";
 import { CgProfile } from "react-icons/cg";
+import { useRef, useState } from "react";
 
 export default function Description() {
   const [isDialog, setIsDialog] = useRecoilState(dialogBox);
   const [isWatch, setIsWatch] = useRecoilState(watchNotification);
   const [isComment, setComment] = useRecoilState(isCardDetail);
-  // const setIsTitle = useSetRecoilState(isShowTitle);
-  const cardData = useRecoilValue(dashBoardData);
+  const listData = useRecoilValue(dashBoardData);
+  const card = useRecoilValue(TaskList);
   const index = useRecoilValue(listIndex);
   const navigate = useNavigate();
+  const prevChangesRef = useRef(listData[index]?.listTitle);
 
   const closeDialogHandle = () => {
     setIsDialog(false);
     navigate("/");
   };
 
+  // console.log("dashboard index ", listData[index].listTitle);
+
+  const activityData = {
+    changes: listData[index]?.listTitle,
+    changesAt: card?.createdAt || new Date().toLocaleString(),
+  };
+  const [activity, setActivity] = useState([activityData]);
+
+  console.log(prevChangesRef.current);
+
+  console.log(activityData);
+
+  if (activityData.changes !== prevChangesRef.current) {
+    activityData.changesAt = new Date().toLocaleString();
+    prevChangesRef.current = activityData.changes;
+    setActivity([activityData]);
+  }
+
+  console.log(activityData);
+
   const showCardDetail = () => {
     setComment(!isComment);
   };
 
-  // const ChangeTitle = () => {
-  //   setIsTitle(false);
-  // };
+  console.log(listData[index]);
 
   return (
     <div>
@@ -45,17 +71,13 @@ export default function Description() {
               width: 800,
               minHeight: "90vh",
               backgroundColor: "whitesmoke",
-              // overflow: "scroll",
-              // marginBottom: "3rem",
+              overflow: "auto",
             },
           }}
         >
           <DialogContent>
             <div className={classes.DialogContent}>
-              <Title
-                clickHandler={closeDialogHandle}
-                // ChangeTitle={ChangeTitle}
-              />
+              <Title clickHandler={closeDialogHandle} />
               <div className={classes.container2}>
                 <p style={{ margin: 0, paddingBottom: "0.5rem" }}>
                   Notifications
@@ -92,28 +114,23 @@ export default function Description() {
                   </span>
                 </button>
               </div>
-              <span>
-                <Content />
-              </span>
-              <span>
-                <Activity
-                  showCardDetail={showCardDetail}
-                  isComment={isComment}
-                />
-              </span>
-              <span>
-                <Comment />
-              </span>
+              <Content />
+              <Activity showCardDetail={showCardDetail} isComment={isComment} />
+              <Comment />
               {isComment ? (
                 ""
               ) : (
-                <span className={classes.div2}>
+                <div className={classes.div2}>
                   <CgProfile className={classes.icons} />
                   <span className={classes.container5}>
-                    <p>user added this card to {cardData[index].listTitle}</p>
-                    {cardData[index].createdAt}
+                    {activity.map((ele, index) => (
+                      <span key={index}>
+                        <p>user added this card to {ele.changes}</p>
+                        {ele.changesAt}
+                      </span>
+                    ))}
                   </span>
-                </span>
+                </div>
               )}
             </div>
           </DialogContent>

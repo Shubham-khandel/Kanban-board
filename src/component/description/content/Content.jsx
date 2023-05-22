@@ -4,11 +4,11 @@ import { Editor } from "@tinymce/tinymce-react";
 import style from "./Content.module.css";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { TaskList, listIndex, dashBoardData } from "../../../atom/Atom";
+import { setLocalData } from "../../../Utils";
 
 export default function Content() {
   const [description, setDescription] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  // const updateList = useRecoilValue(TaskList);
   const [cardData, setCardData] = useRecoilState(dashBoardData);
   const index = useRecoilValue(listIndex);
   const [updateList, setUpdateList] = useRecoilState(TaskList);
@@ -45,31 +45,14 @@ export default function Content() {
     };
 
     setCardData(updatedCardData);
+    setLocalData(updatedCardData);
+
     console.log("new data ", cardData);
     setUpdateList((prevTitle) => {
       console.log(prevTitle);
       const updatedTitle = { ...prevTitle, description: content };
       return updatedTitle;
     });
-
-    // setShowContent(true);
-    // const id = updateList.cardId;
-    // setDescription(true);
-    // console.log(content);
-    // const update = [...cardData];
-    // const updateDescription = [...update[index].cards];
-    // const cardIndex = updateDescription.findIndex((card) => card.cardId === id);
-    // if (cardIndex !== -1) {
-    //   updateDescription[cardIndex] = {
-    //     ...updateDescription[cardIndex],
-    //     description: content,
-    //   };
-    //   console.log(cardIndex);
-    // }
-    // update[index] = { ...update[index], cards: updateDescription };
-    // setCardData(update);
-    // console.log(index);
-    // console.log("new data ", cardData);
   };
   return (
     <div>
@@ -119,19 +102,11 @@ export default function Content() {
               Submit
             </button>
             <button className={style.btn2} onClick={() => setDescription(true)}>
-              Cancle
+              Cancel
             </button>
           </span>
         </>
       )}
-      {/* {showContent === true || content !== "" ? (
-        <div
-          style={{ paddingLeft: "3rem" }}
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
-      ) : (
-        ""
-      )} */}
     </div>
   );
 }

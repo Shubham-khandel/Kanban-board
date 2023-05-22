@@ -22,7 +22,7 @@ export default function TitleInput({ onChange, onClick, setOpen, listName }) {
       <div className={styles.textBox}>
         <TextField
           type="text"
-          placeholder="add card"
+          placeholder="add title"
           onChange={onChange}
           sx={{
             width: "15rem",
