@@ -66,18 +66,20 @@ export default function DashBoard() {
     if (!listName) {
       return;
     }
-    const newListItem = {
-      listId: uuidv4(),
-      listTitle: listName,
-      cards: [],
-      createdAt: new Date().toLocaleString(),
-      activity: [],
-    };
-    const tempData = [...listData, newListItem];
-    setListData(tempData);
-    setLocalData(tempData);
-    setOpen(false);
-    setListName("");
+    if (listName.length > 2 && listName.length < 12) {
+      const newListItem = {
+        listId: uuidv4(),
+        listTitle: listName,
+        cards: [],
+        createdAt: new Date().toLocaleString(),
+        activity: [],
+      };
+      const tempData = [...listData, newListItem];
+      setListData(tempData);
+      setLocalData(tempData);
+      setOpen(false);
+      setListName("");
+    }
   }
 
   function changeImg() {
@@ -222,6 +224,7 @@ export default function DashBoard() {
               onChange={(e) => setListName(e.target.value)}
               onClick={handleCreateList}
               setOpen={setOpen}
+              listName={listName}
             />
           ) : (
             <AddListButton onClick={handleClick} />

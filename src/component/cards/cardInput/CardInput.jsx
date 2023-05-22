@@ -9,8 +9,20 @@ import { useRecoilState } from "recoil";
 import { dashBoardData } from "../../../atom/Atom";
 import { v4 as uuidv4 } from "uuid";
 import { setLocalData } from "../../../Utils";
+import { makeStyles } from "@material-ui/core";
+import { FormHelperText } from "@mui/material";
+
+const useStyles = makeStyles((theme) => ({
+  helperText: {
+    color: "red",
+    margin: "0px",
+    padding: "0px",
+    // backgroundColor: "#f1f2f4",
+  },
+}));
 
 export function CardInput({ show, index }) {
+  const classes = useStyles();
   const [cardData, setCardData] = useRecoilState(dashBoardData);
   const [input, setInput] = useState("");
   // const [input3, setInput3] = useState([]);
@@ -23,29 +35,31 @@ export function CardInput({ show, index }) {
     if (!input) {
       return;
     }
-    const temp = [...cardData[index].cards];
-    console.log("index is " + index);
-    const newCard = {
-      cardId: uuidv4(),
-      cardTitle: input,
-      description: "",
-      createdAt: new Date().toLocaleString(),
-      activity: [
-        {
-          changes: "xyz added this card to todo",
-          chagedAt: new Date().toLocaleString(),
-        },
-      ],
-    };
-    temp.push(newCard);
-    const updated = { ...cardData[index], cards: temp };
-    const final = [...cardData];
-    final[index] = updated;
-    console.log(updated);
-    setCardData(final);
-    setLocalData(final);
-    setInput("");
-    show(!show);
+    if (input.length > 2 && input.length < 25) {
+      const temp = [...cardData[index].cards];
+      console.log("index is " + index);
+      const newCard = {
+        cardId: uuidv4(),
+        cardTitle: input,
+        description: "",
+        createdAt: new Date().toLocaleString(),
+        activity: [
+          {
+            changes: "xyz added this card to todo",
+            chagedAt: new Date().toLocaleString(),
+          },
+        ],
+      };
+      temp.push(newCard);
+      const updated = { ...cardData[index], cards: temp };
+      const final = [...cardData];
+      final[index] = updated;
+      console.log(updated);
+      setCardData(final);
+      setLocalData(final);
+      setInput("");
+      show(!show);
+    }
   }
 
   return (
@@ -60,6 +74,18 @@ export function CardInput({ show, index }) {
             sx={{ width: "18vw", backgroundColor: "white" }}
             size="small"
             multiline
+            helperText={
+              <FormHelperText className={classes.helperText}>
+                {(input.length < 3 && "Card content is too small") ||
+                  (input.length > 25 &&
+                    "Card content should not exceed 25 characters")}
+              </FormHelperText>
+            }
+            InputProps={{
+              classes: {
+                helperText: classes.helperText,
+              },
+            }}
           />
         </div>
         <div className={styles.addCardBtn}>

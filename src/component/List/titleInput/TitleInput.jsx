@@ -3,8 +3,20 @@ import styles from "./TitleInput.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import { makeStyles } from "@material-ui/core";
+import { FormHelperText } from "@mui/material";
 
-export default function TitleInput({ onChange, onClick, setOpen }) {
+const useStyles = makeStyles((theme) => ({
+  helperText: {
+    color: "red",
+    margin: "0px",
+    padding: "0px",
+    // backgroundColor: "#f1f2f4",
+  },
+}));
+
+export default function TitleInput({ onChange, onClick, setOpen, listName }) {
+  const classes = useStyles();
   return (
     <div className={styles.addCardContainer}>
       <div className={styles.textBox}>
@@ -12,7 +24,6 @@ export default function TitleInput({ onChange, onClick, setOpen }) {
           type="text"
           placeholder="add card"
           onChange={onChange}
-          //   value={input}
           sx={{
             width: "15rem",
             backgroundColor: "white",
@@ -21,6 +32,18 @@ export default function TitleInput({ onChange, onClick, setOpen }) {
           }}
           size="small"
           multiline
+          helperText={
+            <FormHelperText className={classes.helperText}>
+              {(listName.length < 3 && "List name is too small") ||
+                (listName.length > 12 &&
+                  "List name should not exceed 12 characters")}
+            </FormHelperText>
+          }
+          InputProps={{
+            classes: {
+              helperText: classes.helperText,
+            },
+          }}
         />
       </div>
       <div className={styles.addCardBtn}>
