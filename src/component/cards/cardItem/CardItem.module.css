@@ -37,7 +37,7 @@
 
 .containerCard.dragging {
   box-shadow: #e5dcdcc2 5px 5px 5px;
-  transform: rotate(10deg);
+  transform: rotate(5deg);
   height: 4vh;
   font-weight: 700;
 }

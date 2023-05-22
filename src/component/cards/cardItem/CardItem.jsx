@@ -8,6 +8,8 @@ import { useState } from "react";
 import { dashBoardData } from "../../../atom/Atom";
 import { useRecoilState } from "recoil";
 import { setLocalData } from "../../../Utils";
+import React, { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export function CardItem({
   cardData,
@@ -25,9 +27,6 @@ export function CardItem({
     if (!dummy) {
       return;
     }
-
-    console.log("Lis Index  -", listIndex);
-    console.log("CardIndex ", index);
 
     const updatedData = data.map((list, listInd) => {
       if (listInd === listIndex) {
