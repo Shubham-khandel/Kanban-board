@@ -89,7 +89,7 @@ export default function Content() {
       ) : (
         <>
           <Editor
-            apiKey="<YOUR_API_KEY>"
+            apiKey="de03rpii9vzq5mnqvgk59pvpqfdywfik7u2h47ys8vfhy9gk"
             value={content}
             onEditorChange={handleEditorChange}
           />
@@ -101,9 +101,9 @@ export default function Content() {
             >
               Submit
             </button>
-            <button className={style.btn2} onClick={() => setDescription(true)}>
-              Cancel
-            </button>
+            {/* <button className={style.btn2} onClick={() => setDescription(true)}>
+              Cancle
+            </button> */}
           </span>
         </>
       )}
