@@ -21,7 +21,7 @@ export default function Nav(props) {
   return (
     <nav className={styles.navContainer}>
       <div className={styles.leftSide}>
-        <h3 contentEditable>Home task Managment</h3>
+        <h3 contentEditable>Home task Management</h3>
         <AiOutlineStar cursor="pointer" fontSize="1.4rem" color="white" />
         {lock ? (
           <button onClick={handleLock} className={styles.pBtn}>
