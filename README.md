@@ -1,4 +1,4 @@
-# Kanban-board
+# Kanban-Board
 
 ## Data Structure
 
