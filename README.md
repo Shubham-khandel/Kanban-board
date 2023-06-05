@@ -1,46 +1,62 @@
-Datastructure =>
+# Kanban-board
 
+## Data Structure
+
+The kanban board's data structure is represented as follows:
+
+```javascript
 dashboard = [
-{
-id: "123",
-title: "completed",
-list: [
-{
-taskId: "12345",
-title: "Do something",
-description: "This is description",
-createdAt: "2pm",
-activity: [
-{
-changes: "xyz added this card to todo",
-chagedAt: "2pm",
-},
-],
-},
-],
-createdAt: "2pm",
-activity: [
-{
-changes: "xyz added this card to todo",
-chagedAt: "2pm",
-},
-],
-},
+  {
+    id: "123",
+    title: "completed",
+    list: [
+      {
+        taskId: "12345",
+        title: "Do something",
+        description: "This is description",
+        createdAt: "2pm",
+        activity: [
+          {
+            changes: "xyz added this card to todo",
+            changedAt: "2pm",
+          },
+        ],
+      },
+    ],
+    createdAt: "2pm",
+    activity: [
+      {
+        changes: "xyz added this card to todo",
+        changedAt: "2pm",
+      },
+    ],
+  },
 ];
+```
 
-Libraries =>
+## Libraries
 
-1. State management : Recoil,
-2. Drag and drop : react-beautiful-dnd,
-3. UI Library : Material UI
+The following libraries are used in this project:
 
-Deployment : Deployment will be done on open platforms like render.com or Vercel.com
+1. State management: Recoil
+2. Drag and drop: react-beautiful-dnd
+3. UI Library: Material UI
 
-collaborators =>
+## Deployment
+
+The project will be deployed on open platforms such as [render.com](https://render.com) or [vercel.com](https://vercel.com).
+
+## Collaborators
+
+The collaborators working on this project are:
 
 1. Shivaram Dusa
 2. Subhashree Sahoo
 3. Shubham Sharma
 4. Sandesh Ghadage
 
-Project Link : https://kanban-e0dd.onrender.com/
+## Project Link
+
+You can access the project at [https://kanban-e0dd.onrender.com/](https://kanban-e0dd.onrender.com/).
+
+Feel free to explore the kanban board and its features!
