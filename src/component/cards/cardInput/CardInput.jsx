@@ -2,7 +2,7 @@
 import styles from "./CardInput.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 // import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useRecoilState } from "recoil";
@@ -26,6 +26,17 @@ export function CardInput({ show, index }) {
   const [cardData, setCardData] = useRecoilState(dashBoardData);
   const [input, setInput] = useState("");
   // const [input3, setInput3] = useState([]);
+
+  const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    if (input.length < 3 && input.length > 0) {
+      setErrorText("Card content is too small");
+    }
+    if (input.length > 25) {
+      setErrorText("Card content should not exceed 25 characters");
+    }
+  }, [input]);
 
   function handleChange(e) {
     setInput(e.target.value);
@@ -76,9 +87,8 @@ export function CardInput({ show, index }) {
             multiline
             helperText={
               <FormHelperText className={classes.helperText}>
-                {(input.length < 3 && "Card content is too small") ||
-                  (input.length > 25 &&
-                    "Card content should not exceed 25 characters")}
+                {(input.length < 3 && errorText) ||
+                  (input.length > 25 && errorText)}
               </FormHelperText>
             }
             InputProps={{
