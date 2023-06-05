@@ -40,7 +40,7 @@ function Comment() {
       {isEditorView ? (
         <span>
           <Editor
-            apiKey="<YOUR_API_KEY>"
+            apiKey="de03rpii9vzq5mnqvgk59pvpqfdywfik7u2h47ys8vfhy9gk"
             value={content2}
             onEditorChange={handleEditorChange2}
             init={editorConfig}

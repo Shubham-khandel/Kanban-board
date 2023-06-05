@@ -1,29 +1,29 @@
 /* eslint-disable react-refresh/only-export-components */
 import { atom } from "recoil";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { getLocalData } from "../Utils";
-
-let dashboard = [
-  {
-    listId: `list-${uuidv4()}`,
-    listTitle: "completed",
-    cards: [
-      {
-        cardId: uuidv4(),
-        cardTitle: "Do something",
-        description: "",
-        createdAt: new Date().toLocaleString(),
-        activity: [
-          {
-            changes: "",
-            chagedAt: "",
-          },
-        ],
-      },
-    ],
-    createdAt: new Date().toLocaleString(),
-  },
-];
+// ------------------------recommendation---------------------------
+// let dashboard = [
+//   {
+//     listId: `list-${uuidv4()}`,
+//     listTitle: "completed",
+//     cards: [
+//       {
+//         cardId: uuidv4(),
+//         cardTitle: "Do something",
+//         description: "",
+//         createdAt: new Date().toLocaleString(),
+//         activity: [
+//           {
+//             changes: "",
+//             chagedAt: "",
+//           },
+//         ],
+//       },
+//     ],
+//     createdAt: new Date().toLocaleString(),
+//   },
+// ];
 
 const localData = getLocalData();
 
@@ -42,7 +42,7 @@ export const dragListIndex = atom({
   default: 0,
 });
 
-// Description Atoms
+// ----------------------------------Description Atoms  ----------------------------------------------------------------------
 
 export const isCardDetail = atom({
   key: "isCardDetail",
@@ -54,10 +54,6 @@ export const isShowTitle = atom({
   default: true,
 });
 
-// export const cardTitle = atom({
-//   key: "cardTitle",
-//   default: "",
-// });
 export const listIndex = atom({
   key: "listIndex",
   default: 0,
