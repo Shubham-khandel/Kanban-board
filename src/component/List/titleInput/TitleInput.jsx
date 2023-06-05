@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@material-ui/core";
 import { FormHelperText } from "@mui/material";
+import React, { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   helperText: {
@@ -17,6 +18,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TitleInput({ onChange, onClick, setOpen, listName }) {
   const classes = useStyles();
+
+  const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    if (listName.length < 3 && listName.length > 0) {
+      setErrorText("Card content is too small");
+    }
+    if (listName.length > 12) {
+      setErrorText("Card content should not exceed 25 characters");
+    }
+  }, [listName]);
+
   return (
     <div className={styles.addCardContainer}>
       <div className={styles.textBox}>
@@ -34,9 +47,8 @@ export default function TitleInput({ onChange, onClick, setOpen, listName }) {
           multiline
           helperText={
             <FormHelperText className={classes.helperText}>
-              {(listName.length < 3 && "List name is too small") ||
-                (listName.length > 12 &&
-                  "List name should not exceed 12 characters")}
+              {(listName.length < 3 && errorText) ||
+                (listName.length > 12 && errorText)}
             </FormHelperText>
           }
           InputProps={{
