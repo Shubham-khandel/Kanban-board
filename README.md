@@ -44,7 +44,7 @@ The following libraries are used in this project:
 
 ## Deployment
 
-The project will be deployed on open platforms such as [render.com](https://render.com) or [vercel.com](https://vercel.com).
+The project deployed on open platform [render.com](https://render.com)
 
 ## Collaborators
 
